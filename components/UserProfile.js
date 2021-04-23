@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react';
 import {Card,Button} from 'antd';
 import Avatar from 'antd/lib/avatar/avatar';
+
+
 const UserProfile = ({setIsLoggedIn}) => {
+    console.log(setIsLoggedIn)
     const onLogOut = useCallback(()=> {
         setIsLoggedIn(false)
     })
@@ -19,5 +22,6 @@ const UserProfile = ({setIsLoggedIn}) => {
        </Card>
     )
 };
+
 
 export default UserProfile

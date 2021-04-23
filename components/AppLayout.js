@@ -27,7 +27,7 @@ const [isLoggedIn, setIsLoggedIn] = useState(false)
          <Col xs={24} md={12}>{children}</Col>
          <Col xs={24} md={6}><a href='https://www.zerocho.com' target='_blank' rel='noreferrer noopener'>Made by Zerocho</a></Col>
       </Row>
-      {children}
+
     </div>
   );
 };
