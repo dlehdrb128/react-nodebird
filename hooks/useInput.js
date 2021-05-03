@@ -8,6 +8,6 @@ import {useState, useCallback} from 'react'
         setValue(e.target.value)
     },[])
     
-    return [value, handler];
+    return [value, handler, setValue];
 }
 

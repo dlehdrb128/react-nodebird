@@ -1,9 +1,7 @@
-import {HYDRATE} from 'next-redux-wrapper';
-import user from './user'
-import post from './post'
+import { HYDRATE } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
-
-
+import user from './user';
+import post from './post';
 
 // async action creator
 // action creators
@@ -12,23 +10,21 @@ import { combineReducers } from 'redux';
 //     type: 'CHANGE_NICKNAME',
 //     data:'boogicho',
 // }
-
-
-
 // (이전상태, 액션) => 다음상태
-const rootReducer = combineReducers ({
-    index:(state = {}, action) => {
+const rootReducer = combineReducers({
+  index: (state = {}, action) => {
     switch (action.type) {
-        case HYDRATE:
-            console.log('HYDRATE', action);
-            return {...state, ...action.payload};
-       
-        default:
-            return state;
-       }
-   },
-   user,
-   post
-})
+      case HYDRATE:
+        console.log('HYDRATE', action);
+        return { ...state, ...action.payload };
 
-export default rootReducer
+      default:
+        return state;
+    }
+  },
+  user,
+  post,
+
+});
+
+export default rootReducer;
