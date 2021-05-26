@@ -1,54 +1,75 @@
-import React,{useCallback,useState} from 'react';
-import AppLayout from '../components/AppLayout';
-import Head from 'next/head'
-import {Form, Input, Checkbox, Button} from 'antd';
-import useInput from '../hooks/useInput';
+import React, { useCallback, useEffect, useState} from 'react';
+import Head from 'next/head';
+import { Form, Input, Checkbox, Button } from 'antd';
 import styled from 'styled-components';
-import { SIGN_UP_REQUEST } from '../reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
+import useInput from '../hooks/useInput';
+import { SIGN_UP_REQUEST } from '../reducers/user';
+import AppLayout from '../components/AppLayout';
+
 
 const ErrorMessage = styled.div`   
 color:red;
 `;
 
-  const Signup = () => {
+const Signup = () => {
   const dispatch = useDispatch();
-  const {signUpLoading} = useSelector((state) => state.user)
+  const { signUpLoading, signUpDone, signUpError, me } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (me && me.id) {
+      Router.replace('/');
+    }
+  }, [me && me.id]);
+
+  useEffect(() => {
+    if (signUpDone) {
+      Router.replace('/');
+    }
+  }, [signUpDone]);
+
+  useEffect(() => {
+    if (signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
+
   const [email, onChangeEmail] = useInput('');
   const [nickname, onChangeINickname] = useInput('');
   const [password, onChangePassword] = useInput('');
 
   const [PasswordCheck, setPasswordCheck] = useState('');
   const [passwordError, setPasswordError] = useState(false);
-  
-  const onChangePasswordCheck =useCallback((e)=> {
+
+  const onChangePasswordCheck = useCallback((e) => {
     setPasswordCheck(e.target.value);
     setPasswordError(e.target.value !== password);
-  }, [password])
+  }, [password]);
 
   const [term, setTerm] = useState(false);
-  console.log(term)
+  console.log(term);
   const [termError, setTermError] = useState(false);
-  const onChangeTerm = useCallback((e)=> {
-    setTerm(e.target.checked)
+  const onChangeTerm = useCallback((e) => {
+    setTerm(e.target.checked);
     setTermError(false);
-  }, [])
-  
-  const onSubmit = useCallback(()=> {
-    if(password !== PasswordCheck) {
-      return setPasswordError(true)
+  }, []);
+
+  const onSubmit = useCallback(() => {
+    if (password !== PasswordCheck) {
+      return setPasswordError(true);
     }
-    if(!term) {
+    if (!term) {
       return setTermError(true);
     }
-    console.log(email,nickname,password ,term)
+    console.log(email, nickname, password, term);
     dispatch({
-      type:SIGN_UP_REQUEST,
-      data:{email,password,nickname},
-    })
-  }, [email ,password,PasswordCheck,term]);
+      type: SIGN_UP_REQUEST,
+      data: { email, password, nickname },
+    });
+  }, [email, password, PasswordCheck, term]);
 
-  return(
+  return (
     <AppLayout>
       <Head>
         <title>회원 가입</title>

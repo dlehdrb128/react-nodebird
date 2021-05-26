@@ -1,8 +1,8 @@
-import {Button, Form, Input} from 'antd';
-import React,{ useCallback, useEffect} from 'react';
-import useInput from '../hooks/useInput';
-import PropTypes from 'prop-types'
+import { Button, Form, Input } from 'antd';
+import React, { useCallback, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import useInput from '../hooks/useInput';
 import { ADD_COMMENT_REQUEST } from '../reducers/post';
 
 const CommentForm = ({ post }) => {
