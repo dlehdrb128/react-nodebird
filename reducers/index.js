@@ -10,7 +10,7 @@ import post from './post';
 //     type: 'CHANGE_NICKNAME',
 //     data:'boogicho',
 // }
-// (이전상태, 액션) => 다음상태
+// (이전상태, 액션) => 다음상태!
 const rootReducer = (state, action) => {
   switch (action.type) {
     case HYDRATE:
